@@ -57,8 +57,8 @@ Solve script below
 		print("What we are sending "+month.decode()+" "+day.decode()+ "\nOn round "+str(cr))
 		if month==b"December" and day==b"31" and cr==100:
 			p.sendline(month+b" "+day)
-			print(p.recvline)
-			print(p.recvline)
+			print(p.recvline())
+			print(p.recvline())
 			break
 		elif month==b"December" and day==b"31":
 			p.sendline(month+b" "+day)

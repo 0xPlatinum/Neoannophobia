@@ -27,6 +27,8 @@ One, The month that the previous player chose, then we can choose any date in th
 
 Two, The day that the previous player chose, then we can choose any month in the future with that day.
 We cannot choose the same date the previous player chose
+
+
 Finally, to get the flag, we need to win 100 times against the computer.
 Ok, cool, we now know the rules and goal. Lets begin
 
@@ -57,9 +59,15 @@ https://mindyourdecisions.com/blog/2016/08/21/the-race-to-december-31-sunday-puz
 
 This suggests that the winning strategy for each day and month we want to choose is day = month + 19.
 Doing this for each month, we end up with the following.
+
+
 1/20 2/21 3/22 4/23 5/24 6/25 7/26 8/27 9/28 10/29 11/30 12/31
+
+
 There is a small issue, we dont control the first day, so if the computer plays perfectly, we can never win.
-Luckily for us, as we saw from our initial prompt, its not exactly smart. So, if he doesnt play January 20th, we should be able to, thus resulting in our inevitable victory!
+Luckily for us, as we saw from our initial prompt, its not exactly smart.
+
+So, if he doesnt play January 20th, we should be able to, thus resulting in our inevitable victory!
 
 # Creating the script
 Lets start adding onto our script using this winning strategy. The way I decided to do this was with a key : value dictionary, its simple and allows for us to reference the month given to us, and play the correct winning move every time. We should also add a round counter so we know when to stop
@@ -81,12 +89,13 @@ Lets start automating our first input, as well as recieving the response.
 We know that at the beginning of this prompt, 3 lines are printed before the new month and day are given.
 
 So we can just use "p.recvline()" to get all 3 of those lines, then we know the next line is the date.
-Something like this would work. But for now, since we just want to enter the dates and recieve dates, we just need one "p.recv()" which contains the date. Also, assuming we need to do this 100 times, lets put it into a while loop.
+Something like this would work. However, since we just want to enter the dates and recieve dates, we just need one "p.recv()" which contains the date. Also, assuming we need to do this 100 times, lets put it into a while loop.
 
 	while cr !=100:
 		string = p.recv()
 Now, p.recv() bascially selects every single bit of data it can.
-We know that it is the month and date, so lets split on a space and get those into variables.
+
+We know that it contains the month and date, so lets split on a space and get those into variables.
 
 	month,day=string.split()
 Cool now this should give us the correct date !

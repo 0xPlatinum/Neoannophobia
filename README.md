@@ -14,7 +14,9 @@ Challenge for ICTF
  # Initial prompt
  After connecting to the service, we are given this prompt.
  
-![prompt](https://user-images.githubusercontent.com/98354876/179836921-28e98669-169c-4576-b25e-5dfca25640a0.png)
+
+![init](https://user-images.githubusercontent.com/98354876/179930327-660b98fd-273e-48f9-9c5c-7c00b9c1ad5b.png)
+
 
 Essentially, our goal is to type out December 31 first.
 The rules are as follows:
@@ -37,7 +39,8 @@ Ok, cool, we now know the rules and goal. Lets begin
 Well, without much info, lets just begin messing around and see how this machine played.
 Since our first prompt was Janaury 31, lets try just entering December 31. We are keeping the day, and moving forward in months.
 
-![initialWin](https://user-images.githubusercontent.com/98354876/179838045-37d62a73-8d43-43bb-b196-10c7f60c2924.png)
+
+![initialWin](https://user-images.githubusercontent.com/98354876/179929676-d157f123-a9b6-45f9-abba-ca72444c4ada.png)
 
 Well... That was easy. Our first win of many to come.
 So, We can add something to our notes; any time the day "31" shows up, we can instantly jump to December 31 and win that round.
@@ -102,11 +105,13 @@ We know that it contains the month and date, so lets split on a space and get th
 	month,day=string.split()
 ```
 Cool now this should give us the correct date !
-![firsterror](https://user-images.githubusercontent.com/98354876/179841608-bb99cf16-7374-445d-91a4-00c5ce4f08d4.png)
+
+![firsterror](https://user-images.githubusercontent.com/98354876/179929341-de24313c-5706-453d-8fbf-8e2e5ff6dd64.png)
+
 ...or not?? Too many values? But i thought it was just the month and day?
 Well, lets print out the string variable so we know what it actual contains.
 
-![ahamoment](https://user-images.githubusercontent.com/98354876/179847460-60f84adb-f521-4a41-83c7-e913159f7cea.png)
+![ahamoment](https://user-images.githubusercontent.com/98354876/179929369-5ed7fd69-7b3c-4887-bfd4-0114a71f1e58.png)
 
 
 Aha! So the reason it didnt work was because there is the ">" string as well. Well, no issue, we can just assign a throwaway variable, ill just call it tmp.
@@ -144,7 +149,9 @@ Adding in some debug code just so we know whats happening, heres our current scr
 		response=p.recv()
 		print(response)
 ```
-![firstsend](https://user-images.githubusercontent.com/98354876/179850186-f461b88b-eaf6-424a-a7ec-d481c58b6444.png)
+
+![firstsend](https://user-images.githubusercontent.com/98354876/179929427-7e2c7e32-10c6-47fc-a8b4-34dfb2c7922e.png)
+
 
 And we get a response!
 Now that we can effectively interact with the service, lets try to use our dictionary to auto-submit these winning moves.
@@ -191,7 +198,7 @@ So lets add a few if statements to take care of the responses and send off our m
 Note we are only checking the month January, because after January, they are stuck, and we have all the winning moves. Just match up whatever day they choose with the month in our key value, and eventually it leads to December 31!
 
 
-![twocorrect](https://user-images.githubusercontent.com/98354876/179854339-9ac76743-c588-4455-b496-5478b32ac7f2.png)
+![twocorrect](https://user-images.githubusercontent.com/98354876/179929466-c86c7744-4c42-4a5e-ae72-ad818c2fab2e.png)
 
 
 Hooray! We got two responses now, and we sent the correct month and date for the first response!. So, what now? Well, now we need to handle the other months cases. So if the other month (July in this case) Sends a day, we need to take the inverse of it and send off the correct month!
@@ -222,7 +229,9 @@ Keep in mind if we win, we need to recieve 4 lines, and then the day because of 
 ```
 We run it, however..
 
-![almost](https://user-images.githubusercontent.com/98354876/179855555-59c13ba1-c0ec-4505-b17d-1586e0e7671f.png)
+
+![almost](https://user-images.githubusercontent.com/98354876/179929497-f25f3f72-d37e-431c-821d-94d7adb26026.png)
+
 
 It would seem just day=hashmap\[month\]  doesnt work.. What if the machine goes further in months, copying our day? Then this doesnt work. So! Lets try to fix this. The way i did this was creating a tempmonth variable which copied the current month we were about to send off.
 Then, when the loop starts over, i check to see if that tempmonth is equal to the month we *just* recieved. If it is, we use the inverse again, using the day we recieved to get the month we should send.
@@ -240,8 +249,9 @@ IE: If we recieved March, we set day to 22. adding this to our if statement
 
 Finally, after all this time.We have completed the successful script. Surely we can get the flag now, i mean, we automated it, it can complete 100 rounds. lets go!
 
+![we-lose2](https://user-images.githubusercontent.com/98354876/179924480-ca15bb7b-ff42-41af-9894-2047a8acce41.png)
 
-![we-lose](https://user-images.githubusercontent.com/98354876/179870667-1b5b4cd4-a199-4971-8125-9b84066ce9a7.png)
+
 
 And our flag ends up being... Error?
 So i was stuck on this error for a while, i mean, it should work, right?
@@ -256,7 +266,9 @@ But eventually if figured out I have too many "p.recvline()". Well.. lets mitiga
 This code took me a bit of fidgeting, but i found out two lines are printed after line 100, so we recieve two. 
 One includes the "You won!" text, the other, includes our flag.
 
-![flag](https://user-images.githubusercontent.com/98354876/179871399-9191d6f3-ef38-4e84-8631-d5eabb66d076.png)
+
+![flag](https://user-images.githubusercontent.com/98354876/179929538-9e262fc3-7bae-4ffc-a79b-953fb3e8af30.png)
+
 
 	ictf{br0ken_gamea_smh_8b1f014a}
 Solve script below

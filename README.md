@@ -233,7 +233,7 @@ We run it, however..
 ![almost](https://user-images.githubusercontent.com/98354876/179929497-f25f3f72-d37e-431c-821d-94d7adb26026.png)
 
 
-It would seem just day=hashmap\[month\]  doesnt work.. What if the machine goes further in months, copying our day? Then this doesnt work. So! Lets try to fix this. The way i did this was creating a tempmonth variable which copied the current month we were about to send off.
+What if the machine goes further in months, copying our day? Then this doesnt work. So! Lets try to fix this. The way i did this was creating a tempmonth variable which copied the current month we were about to send off.
 Then, when the loop starts over, i check to see if that tempmonth is equal to the month we *just* recieved. If it is, we use the inverse again, using the day we recieved to get the month we should send.
 We also need an "else:" statement. We can make our else simply set the day equal to the winning day from the month we just recieved.
 IE: If we recieved March, we set day to 22. adding this to our if statement 

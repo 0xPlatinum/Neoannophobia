@@ -212,7 +212,6 @@ Keep in mind if we win, we need to recieve 4 lines, and then the day because of 
 ```python
 	month=month.encode() #Encoding both month and day
 	day=str(day).encode()
-	tempmonth=month.decode("utf-8") #Set tempmonth = decoded version
 	if month==b'December' and day == b'31':
 		print("What we are sending December 31\nOn round "+str(cr)) #Debug code
 		p.sendline(b"December 31")

@@ -159,7 +159,7 @@ To do that, we need to reference what the month we recieved was and send that da
 However, one issue comes to mind. Remember the rule that we cant go back in the past? Well, we know the machine can response with *any* day from January, including dates above January 20th. So what now? Is it lost, over, doomed?
 No! We still have hope!
 
-If you look at the winning moves, they cover all dates that are above the 20th! Remember the rule that we can use the same day, different month? Why not just jump ahead to the winning move depending on what day they choose. IE: If they choose January 30th, we can jump to the corresponding month, that being November. We send November 30 and we are winning again.
+If you look at the winning moves, they cover all dates that are above the 20th! Remember the rule that we can use the same day, different month? Why not just jump ahead to the winning month depending on what day they choose. IE: If they choose January 30th, we can jump to the corresponding month, that being November. We send November 30 and we are winning again.
 
 Now how might we implement this? Well we need to get the inverse of the key:value, meaning we supply the value and get the key. I googled for a bit, and found this one liner that works
 ```python

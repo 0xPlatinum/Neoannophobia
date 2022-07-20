@@ -9,7 +9,7 @@ Challenge for ICTF
 
 
  The challenge was a 100 point misc challenge. A super fun challenge and defintely my favorite.
- So. Lets jump into it.
+ So, lets jump into it.
  
  # Initial prompt
  After connecting to the service, we are given this prompt.
@@ -21,7 +21,10 @@ The rules are as follows:
 A random date is chosen in January as the starting date
 We cannot go backwards in time, only forward.
 We have to match one of two things: 
+
 One, The month that the previous player chose, then we can choose any date in that month thats in the future.
+
+
 Two, The day that the previous player chose, then we can choose any month in the future with that day.
 We cannot choose the same date the previous player chose
 Finally, to get the flag, we need to win 100 times against the computer.
@@ -35,7 +38,7 @@ Since our first prompt was Janaury 31, lets try just entering December 31. We ar
 ![initialWin](https://user-images.githubusercontent.com/98354876/179838045-37d62a73-8d43-43bb-b196-10c7f60c2924.png)
 
 Well... That was easy. Our first win of many to come.
-So. We can add something to our notes; any time the day "31" shows up, we can instantly jump to December 31 and win that round.
+So, We can add something to our notes; any time the day "31" shows up, we can instantly jump to December 31 and win that round.
 Good to know, lets move forward. Our next prompt is January 12. No easy win this time, but lets try winning anyway. Im going to select a random month. Lets say, June.
 
 However, when i went to enter this date, I came back my connection terminated. We can now add something else to our notes: The ability to do this all manually wont be possible.

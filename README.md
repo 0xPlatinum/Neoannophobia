@@ -55,7 +55,7 @@ https://mindyourdecisions.com/blog/2016/08/21/the-race-to-december-31-sunday-puz
 This suggests that the winning strategy for each day and month we want to choose is day = month + 19.
 Doing this for each month, we end up with the following.
 1/20 2/21 3/22 4/23 5/24 6/25 7/26 8/27 9/28 10/29 11/30 12/31
-Their is a small issue, we dont control the first day, so if the computer plays perfectly, we can never win.
+There is a small issue, we dont control the first day, so if the computer plays perfectly, we can never win.
 Luckily for us, as we saw from our initial prompt, its not exactly smart. So, if he doesnt play January 20th, we should be able to, thus resulting in our inevitable victory!
 
 # Creating the script
@@ -75,7 +75,7 @@ Now our script is the following
 	
 Cool, we have a dictionary we can reference with these winning moves.
 Lets start automating our first input, as well as recieving the response.
-We know that after winning a round, 3 lines are printed before the new month and day are given.
+We know that at the beginning of this prompt, 3 lines are printed before the new month and day are given.
 
 So we can just use "p.recvline()" to get all 3 of those lines, then we know the next line is the date.
 Something like this would work. But for now, since we just want to enter the dates and recieve dates, we just need one "p.recv()" which contains the date. Also, assuming we need to do this 100 times, lets put it into a while loop.
@@ -106,7 +106,7 @@ To send a line with pwntools, we can use
 	p.sendline(DATA)
 or in our case
 
-	p.sendline(b"January 20"
+	p.sendline(b"January 20")
 	print(p.recvline())
 
 Adding in some debug code just so we know whats happening, heres our current script.
@@ -134,7 +134,7 @@ Adding in some debug code just so we know whats happening, heres our current scr
 
 And we get a response!
 Now that we can effectively interact with the service, lets try to use our dictionary to auto-submit these winning moves.
-To do that, we need to reference what the we recieved was and send that day. IE: If we recieve January, send January 20, if we recieve February, send February 21, etc etc.
+To do that, we need to reference what the month we recieved was and send that day. IE: If we recieve January, send January 20, if we recieve February, send February 21, etc etc.
 However, one issue comes to mind. Remember the rule that we cant go back in the past? Well, we know the machine can response with *any* day from January, including dates above January 20th. So what now? Is it lost, over, doomed?
 No! We still have hope!
 

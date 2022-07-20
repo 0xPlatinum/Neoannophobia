@@ -93,7 +93,7 @@ Lets start automating our first input, as well as recieving the response.
 We know that at the beginning of this prompt, 3 lines are printed before the new month and day are given.
 
 So we can just use "p.recvline()" to get all 3 of those lines, then we know the next line is the date.
-Something like this would work. However, since we just want to enter the dates and recieve dates, we just need one "p.recv()" which contains the date. Also, assuming we need to do this 100 times, lets put it into a while loop.
+Something like this would work. However, since we just want to enter the dates and recieve this first date, we just need one "p.recv()" which will contain the date. We can worry about grabbing those extra lines later. Also, assuming we need to do this 100 times, lets put it into a while loop.
 ```python
 	while cr !=100:
 		string = p.recv()

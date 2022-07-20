@@ -94,8 +94,10 @@ We know that at the beginning of this prompt, 3 lines are printed before the new
 
 So we can just use "p.recvline()" to get all 3 of those lines, then we know the next line is the date.
 Something like this would work. However, since we just want to enter the dates and recieve this first date, we just need one "p.recv()" which will contain the date. We can worry about grabbing those extra lines later. Also, assuming we need to do this 100 times, lets put it into a while loop.
+
+The reason *why* i am setting cr to 101 and not 100, is because our cr variable is set to 1 at the start. We need 100 rounds after that, whats 100 + 1? 101
 ```python
-	while cr !=100:
+	while cr !=101:
 		string = p.recv()
 ```
 Now, p.recv() bascially selects every single bit of data it can.
@@ -140,7 +142,7 @@ Adding in some debug code just so we know whats happening, heres our current scr
 	print(p.recvline())
 	p.recvline()
 
-	while cr!=100:
+	while cr!=101:
 		string=p.recv()
 		month,day,tmp=string.split()
 		print("\n")
@@ -172,9 +174,10 @@ So lets add a few if statements to take care of the responses and send off our m
 ```python
 	p.sendline(month + b" " + day)
 ```
-*(Note) When recieving data, it is in bytes format. To convert it back to a string, do VARNAME.decode("utf-8") you also need to re-encode it before sending it off using VARNAME.encode()* 
+*(Note) When recieving data, it is in bytes format. To convert it back to a string, do VARNAME.decode("utf-8").
+you also need to re-encode it before sending it off using VARNAME.encode()* 
 ```python
-	while cr!=100:
+	while cr!=101:
 		string=p.recv() #Recieve the date
 		month,day,tmp=string.split() #split it
 		print("\n")
@@ -201,14 +204,14 @@ Note we are only checking the month January, because after January, they are stu
 ![twocorrect](https://user-images.githubusercontent.com/98354876/179929466-c86c7744-4c42-4a5e-ae72-ad818c2fab2e.png)
 
 
-Hooray! We got two responses now, and we sent the correct month and date for the first response!. So, what now? Well, now we need to handle the other months cases. So if the other month (July in this case) Sends a day, we need to take the inverse of it and send off the correct month!
+Hooray! We got two responses now, and we sent the correct month and date for the first response! So, what now? Well, now we need to handle the other months cases. So if the other month (July in this case) Sends a day, we need to take the inverse of it and send off the correct month!
 If it was implemented now, we wouldve gotten a win, as it would looked up December 31! Lets add an "else" statement that takes the inverse and sets the day and month variable, ready to be sent off!
 ```python
 		else:
 		   day=str(day)
 		   month=list(hashmap.keys())[list(hashmap.values()).index(day)]
 ```
-Keep in mind if we win, we need to recieve 4 lines, and then the day because of the new round. Thats not so hard to do, we can just check if the month and day we are about to send off is December 31, and if it is, we can send it, recieve 4 lines, and then end the if case, as our while loop will recieve the new date!  If it is not December 31, we can just send it normally with an Else Statement. Lets get to implementing it.
+Keep in mind if we win, we need to recieve 4 lines, and then the date because of the new round. Thats not so hard to do, we can just check if the month and day we are about to send off is December 31, and if it is, we can send it, recieve 4 lines, and then end the if case, as our while loop will recieve the new date!  If it is not December 31, we can just send it normally with an Else Statement. Lets get to implementing it.
 ```python
 	month=month.encode() #Encoding both month and day
 	day=str(day).encode()
@@ -253,8 +256,8 @@ Finally, after all this time.We have completed the successful script. Surely we 
 
 
 And our flag ends up being... Error?
-So i was stuck on this error for a while, i mean, it should work, right?
-But eventually if figured out I have too many "p.recvline()". Well.. lets mitigate that by adding onto our if, else statement at the bottom that determines which month/day we send. We can just add 
+So I was stuck on this error for a while, I mean, it should work, right?
+But eventually I figured out I had too many "p.recvline()" lines. Well.. lets mitigate that by adding onto our if, else statement at the bottom that determines which month/day we send. We can just add 
 ```python
 	if month==b"December' and day == b"31" and cr == 100:
 		p.sendline(month + b" " + day)

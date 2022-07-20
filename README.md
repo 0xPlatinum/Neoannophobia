@@ -21,8 +21,8 @@ The rules are as follows:
 A random date is chosen in January as the starting date
 We cannot go backwards in time, only forward.
 We have to match one of two things: 
-One, The current month that the previous player chose, then we can choose any date in that month.
-Two, The current date that the previous player chose, then we can choose any month in the future with that day.
+One, The month that the previous player chose, then we can choose any date in that month thats in the future.
+Two, The day that the previous player chose, then we can choose any month in the future with that day.
 We cannot choose the same date the previous player chose
 Finally, to get the flag, we need to win 100 times against the computer.
 Ok, cool, we now know the rules and goal. Lets begin
